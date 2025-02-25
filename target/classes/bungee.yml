@@ -1,0 +1,10 @@
+name: 'RewardADs'
+version: '5.5'
+main: it.nathanub.rewardads.BungeeMain
+description: 'RewardADs official library for BungeeCord'
+author: "Nathanub, WiinUp_YT"
+commands:
+  rewardads:
+    description: 'Spam command and for reload'
+  confirm:
+    description: 'Verify your server'
