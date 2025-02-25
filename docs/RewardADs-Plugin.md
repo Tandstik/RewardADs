@@ -6,7 +6,7 @@ sidebar_position: 1
 
 ---
 
-## About RewardADss
+## About RewardADs
 
 RewardADs is a service that lets users earn AdBits, a virtual currency, 
 by simply clicking the "Earn" button. Users can then exchange these AdBits 
