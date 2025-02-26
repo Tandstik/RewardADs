@@ -6,6 +6,8 @@ import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.Future;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import it.nathanub.rewardads.Spigot.Tools.Api.Api;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -48,6 +50,29 @@ public class Link {
             if (jsonResponse != null && !jsonResponse.isEmpty()) {
                 if (jsonResponse.contains("\"id_user\"")) {
                     return true;
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean isLinkedId(String value) {
+        Future<String> response = Api.handle("getaccountbyid/" + value);
+
+        try {
+            String jsonResponse = response.get();
+            if (jsonResponse != null && !jsonResponse.isEmpty()) {
+                if (jsonResponse.contains("\"minecraft_user\"")) {
+                    JsonObject jsonObject = JsonParser.parseString(jsonResponse).getAsJsonObject();
+
+                    if (jsonObject.has("minecraft_user")) {
+                        String minecraftUser = jsonObject.get("minecraft_user").getAsString();
+
+                        return minecraftUser != null && !minecraftUser.trim().isEmpty();
+                    }
                 }
             }
 
