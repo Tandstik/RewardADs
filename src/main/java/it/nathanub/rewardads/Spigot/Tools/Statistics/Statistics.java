@@ -53,9 +53,7 @@ public class Statistics {
 
             String idPlayer = jsonObject.get("id_player").getAsString();
             String adbitsPlayer = jsonObject.get("adbits_player").getAsString();
-
-            if(link.isLinked(idPlayer))
-                result.add(idPlayer + "," + adbitsPlayer);
+            result.add(idPlayer + "," + adbitsPlayer);
         }
 
         return result;

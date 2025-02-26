@@ -9,7 +9,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6b1c0cf9-d472-4ea2-b502-0bac79c00032" name="Changes" comment="updated class" />
+    <list default="true" id="6b1c0cf9-d472-4ea2-b502-0bac79c00032" name="Changes" comment="updated class">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/nathanub/rewardads/Spigot/Tools/Statistics/Statistics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/nathanub/rewardads/Spigot/Tools/Statistics/Statistics.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/RewardADs-5.5-shaded.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/RewardADs-5.5-shaded.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/RewardADs-5.5.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/RewardADs-5.5.jar" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,6 +45,9 @@
   &quot;associatedIndex&quot;: 2
 }</component>
   <component name="ProjectId" id="2m7RzJMz0SbJjB3yqY52PozYXDP" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -57,7 +66,7 @@
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/mario/IdeaProjects/rewardads/target&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/mario/IdeaProjects/rewardads/libs&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.14648438&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.39289805&quot;,
@@ -84,19 +93,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="RewardADs" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="RewardADs" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="RewardADs" type="MavenRunConfiguration" factoryName="Maven" nameIsGenerated="true">
       <MavenSettings>
         <option name="myGeneralSettings" />
@@ -130,6 +126,7 @@
     <attachedChunks>
       <set>
         <option value="jdk-11.0.22-corretto-11.0.22-4caba194b151-868cef46" />
+        <option value="jdk-22-openjdk-22-3183f394aec4-bad0321e" />
       </set>
     </attachedChunks>
   </component>
