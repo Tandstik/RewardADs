@@ -21,7 +21,7 @@ allowfullscreen>
 
 ---
 
-### How to link your Minecraft with RewardADs Account And Buy RewardADs
+### How to link your Minecraft with RewardADs Account And Buy Rewards
 
 
 <iframe width="950" height="550" 
