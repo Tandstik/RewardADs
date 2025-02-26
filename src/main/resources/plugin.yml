@@ -1,5 +1,5 @@
 name: 'RewardADs'
-version: '5.6'
+version: '5.7'
 main: it.nathanub.rewardads.SpigotMain
 api-version: '1.14'
 description: 'RewardADs official library for Spigot'

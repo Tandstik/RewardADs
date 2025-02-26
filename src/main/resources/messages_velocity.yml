@@ -1,6 +1,6 @@
 prefix: &7[&6R&7] &f
 
-invalid-code: &cThe code isn't valid in config, insert a valid code by creating a server on https://rewardads.it/console, if you haven't already.
+invalid-code: \u001B[31mThe code isn't valid in config, insert a valid code by creating a server on https://rewardads.it/console, if you haven't already.
 server-using-rewardads: &a%server% &fis using &6RewardADs &7v%version% &f!
 no-permission: &cYou don't have permission
 reloaded: &6RewardADs&a reloaded successfully!
