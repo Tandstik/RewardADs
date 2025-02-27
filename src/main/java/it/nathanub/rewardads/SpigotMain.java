@@ -31,13 +31,12 @@ public class SpigotMain extends JavaPlugin {
 
         try {
             saveDefaultConfig();
+            saveDefaultMessages();
+            loadMessages();
             if(!getConfig().getBoolean("isBungee") && server.isValid()) {
-                saveDefaultMessages();
-                loadMessages();
                 Objects.requireNonNull(this.getCommand("rewardads")).setExecutor(new Commands(this, messageConfig));
                 Objects.requireNonNull(this.getCommand("confirm")).setExecutor(new Commands(this, messageConfig));
                 getServer().getPluginManager().registerEvents(new Events(this), this);
-                saveDefaultConfig();
                 createUserData();
                 getLogger().info("Library RewardADs (Spigot) enabled!");
                 getLogger().info("Welcome back " + server.getName() + " to RewardADs!");
