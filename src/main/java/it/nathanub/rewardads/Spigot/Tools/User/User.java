@@ -20,12 +20,28 @@ public class User {
     }
 
     public String getId(Player player) {
-        if(player == null)
-            return null;
+        String playerName = player.getName();
+        Future<String> response = Api.handle("getaccountbyminecraft/" + playerName);
 
-        File userFile = new File(this.plugin.getDataFolder(), "userdata.yml");
-        YamlConfiguration yamlConfiguration = YamlConfiguration.loadConfiguration(userFile);
-        return yamlConfiguration.getString("users." + player.getUniqueId());
+        try {
+            String jsonResponse = response.get();
+            if (jsonResponse != null && !jsonResponse.isEmpty()) {
+                if (jsonResponse.contains("\"id_user\"")) {
+                    JsonObject jsonObject = JsonParser.parseString(jsonResponse).getAsJsonObject();
+
+                    if (jsonObject.has("id_user")) {
+                        String idUser = jsonObject.get("id_user").getAsString();
+                        if(idUser != null && !idUser.trim().isEmpty()){
+                            return idUser;
+                        }
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "null";
     }
 
     public String getUUId(String idPlayer) {
