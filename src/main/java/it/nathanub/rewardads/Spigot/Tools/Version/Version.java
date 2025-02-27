@@ -27,7 +27,8 @@ public class Version {
                 JsonElement jsonElement = new JsonParser().parse(response);
                 JsonObject jsonObject = jsonElement.getAsJsonObject();
                 String currentVersion = jsonObject.get("current_version").getAsString();
-                return Objects.equals(currentVersion, getPlugin());
+                String versionNumber = currentVersion.split(" ")[0].substring(1);
+                return Objects.equals(versionNumber, getPlugin());
             } catch(Exception e) {
                 Error.send(this.code, e);
                 return false;
