@@ -8,26 +8,31 @@ import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 
 import it.nathanub.rewardads.Spigot.Tools.Logs.Error;
+import it.nathanub.rewardads.SpigotMain;
 import org.bukkit.Bukkit;
-import org.bukkit.plugin.Plugin;
 
 public class Version {
-    private final Plugin plugin;
+    private final SpigotMain plugin;
     private final String code;
+    private String versionNumber;
 
-    public Version(Plugin plugin) {
+    public Version(SpigotMain plugin) {
         this.plugin = plugin;
         this.code = plugin.getConfig().getString("code");
     }
 
     public void checkForUpdate() {
+        String ANSI_GREEN = "\u001B[32m";
+        String ANSI_YELLOW = "\u001B[33m";
+        String ANSI_RESET = "\u001B[0m";
         CompletableFuture.supplyAsync(() -> {
             try {
                 String response = Api.handle("https://api.spiget.org/v2/resources/121867/versions/latest").get();
                 JsonElement jsonElement = new JsonParser().parse(response);
                 JsonObject jsonObject = jsonElement.getAsJsonObject();
                 String currentVersion = jsonObject.get("name").getAsString();
-                String versionNumber = currentVersion.split(" ")[0].substring(1);
+                this.versionNumber = currentVersion.split(" ")[0].substring(1);
+
                 return Objects.equals(versionNumber, getPlugin());
             } catch(Exception e) {
                 Error.send(this.code, e);
@@ -36,6 +41,8 @@ public class Version {
         }).thenAccept(upToDate -> {
             if(!upToDate)
                 plugin.getLogger().warning("Keep me updated! Download the latest version from https://spi.rewardads.it.");
+            else
+                plugin.getLogger().info(plugin.safeTranslate(ANSI_GREEN + "You're UpToDate to latest version: " + ANSI_YELLOW + "v" + versionNumber + ANSI_RESET));
         });
     }
 
