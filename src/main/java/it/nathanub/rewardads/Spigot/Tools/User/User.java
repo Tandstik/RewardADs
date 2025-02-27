@@ -111,4 +111,36 @@ public class User {
         }
     }
 
+    public int getBuys(Player player) {
+        Future<String> future = Api.handle("getbuy/" + getId(player));
+
+        try {
+            String response = future.get();
+
+            if(response == null || response.isEmpty()) {
+                return 0;
+            }
+
+            JsonElement jsonElement = new JsonParser().parse(response);
+
+            if(!jsonElement.isJsonArray()) {
+                return 0;
+            }
+
+            JsonArray jsonArray = jsonElement.getAsJsonArray();
+            if(jsonArray.size() == 0) {
+                return 0;
+            }
+
+            JsonObject jsonObject = jsonArray.get(0).getAsJsonObject();
+            return jsonObject.has("buys") ? jsonObject.get("buys").getAsInt() : 0;
+        } catch(ExecutionException | InterruptedException e) {
+            this.plugin.getLogger().severe("Internal error: " + e.getMessage());
+            return 0;
+        } catch(JsonSyntaxException | IllegalStateException e) {
+            this.plugin.getLogger().severe("Invalid JSON format: " + e.getMessage());
+            return 0;
+        }
+    }
+
 }
