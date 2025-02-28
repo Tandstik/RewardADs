@@ -4,7 +4,7 @@
 
 Monetize your server effortlessly with **RewardADs**!
 
-[![Version](https://badges.spiget.org/resources/version/Version-orange-121867.svg)
+[![Version](https://badges.spiget.org/resources/version/Version-orange-121867.svg)](https://spi.rewardads.it)
 
 [![Wiki](https://i.imgur.com/jGDfaYs.png)](https://wiki.rewardads.it)  
 [![Discord](https://i.imgur.com/EN3WaFG.png)](https://disc.rewardads.it)  
