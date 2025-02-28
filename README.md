@@ -1,4 +1,4 @@
-[CENTER]
+<p align=center>
   
 # ![Logo](https://i.imgur.com/SPOTXB3.png)
 
@@ -45,4 +45,4 @@ giving them a **sustainable way to fund and expand** their server.
 
 ## **Turn engagement into earnings with RewardADs!** 🚀
 
-[/CENTER]
+
