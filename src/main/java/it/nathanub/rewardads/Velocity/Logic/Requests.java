@@ -42,7 +42,7 @@ public class Requests implements Runnable {
                 Type listType = (new TypeToken<List<Map<String, String>>>() {
 
                 }).getType();
-                List<Map<String, String>> elements = (List<Map<String, String>>)this.gson.fromJson(this.rewards.getList(), listType);
+                List<Map<String, String>> elements = this.gson.fromJson(this.rewards.getList(), listType);
                 if (elements != null && !elements.equals(this.cachedRewards)) {
                     this.cachedRewards = elements;
                     for (Map<String, String> reward : this.cachedRewards) {
