@@ -11,7 +11,6 @@ it\nathanub\rewardads\Bungee\Tools\Accounts\Api.class
 com\google\zxing\common\HybridBinarizer.class
 com\google\zxing\aztec\encoder\BinaryShiftToken.class
 com\google\zxing\oned\rss\expanded\decoders\AI01392xDecoder.class
-com\google\zxing\aztec\decoder\Decoder$1.class
 com\google\zxing\oned\EAN8Reader.class
 com\google\zxing\oned\rss\expanded\decoders\AI013x0x1xDecoder.class
 com\google\zxing\pdf417\decoder\DecodedBitStreamParser$Mode.class
@@ -34,7 +33,6 @@ com\google\zxing\oned\Code128Writer$MinimalEncoder.class
 com\google\zxing\qrcode\decoder\ErrorCorrectionLevel.class
 it\nathanub\rewardads\Velocity\Tools\Server\Server.class
 com\google\zxing\client\result\SMSParsedResult.class
-com\google\zxing\datamatrix\decoder\DecodedBitStreamParser$1.class
 com\google\zxing\client\result\ExpandedProductResultParser.class
 com\google\zxing\oned\rss\expanded\decoders\DecodedInformation.class
 com\google\zxing\datamatrix\encoder\C40Encoder.class
@@ -48,7 +46,6 @@ com\google\zxing\aztec\decoder\Decoder$CorrectedBitsResult.class
 com\google\zxing\qrcode\detector\AlignmentPatternFinder.class
 it\nathanub\rewardads\SpigotMain.class
 com\google\zxing\common\DecoderResult.class
-com\google\zxing\oned\Code128Writer$1.class
 com\google\zxing\datamatrix\decoder\Version$ECB.class
 com\google\zxing\qrcode\QRCodeReader.class
 com\google\zxing\aztec\detector\Detector$CorrectedParameter.class
@@ -156,7 +153,6 @@ com\google\zxing\datamatrix\encoder\MinimalEncoder$Input.class
 com\google\zxing\client\result\AddressBookParsedResult.class
 it\nathanub\rewardads\Spigot\Tools\Logs\Error.class
 com\google\zxing\client\result\BizcardResultParser.class
-com\google\zxing\pdf417\decoder\DecodedBitStreamParser$1.class
 com\google\zxing\aztec\detector\Detector$Point.class
 com\google\zxing\multi\qrcode\QRCodeMultiReader$SAComparator.class
 com\google\zxing\oned\rss\expanded\decoders\BlockParsedResult.class

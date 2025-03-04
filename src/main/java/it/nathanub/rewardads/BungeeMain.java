@@ -28,10 +28,9 @@ public class BungeeMain extends Plugin {
             saveDefaultConfig();
             final Server server = new Server(this);
             final Version version = new Version(this);
-
+            saveDefaultMessages();
+            loadMessages();
             if(server.isValid()) {
-                saveDefaultMessages();
-                loadMessages();
                 getProxy().registerChannel("rewardads:channel");
                 ProxyServer.getInstance().registerChannel("rewardads");
                 ProxyServer.getInstance().registerChannel("confirm");
@@ -42,11 +41,10 @@ public class BungeeMain extends Plugin {
                 getLogger().info("Welcome back " + server.getName() + " to RewardADs!");
 
                 ProxyServer.getInstance().getScheduler().schedule(this, new Requests(this), 0, 1, java.util.concurrent.TimeUnit.SECONDS);
-
-                version.checkForUpdate();
             } else {
                 getLogger().severe(safeTranslate(messageConfig.getString("invalid-code")));
             }
+            version.checkForUpdate();
         } catch(Exception e) {
             Error.send(getConfig().getString("code"), e);
         }

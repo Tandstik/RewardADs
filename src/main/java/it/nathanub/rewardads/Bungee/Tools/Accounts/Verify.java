@@ -4,9 +4,8 @@ import com.google.gson.JsonObject;
 import it.nathanub.rewardads.BungeeMain;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.config.Configuration;
-import org.bukkit.command.Command;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
+import net.md_5.bungee.config.ConfigurationProvider;
+import net.md_5.bungee.config.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,13 +14,16 @@ import java.util.Map;
 import java.util.UUID;
 
 public class Verify {
-    private final FileConfiguration userConfig;
+    private Configuration userConfig;
     private final Configuration messageConfig;
     private final BungeeMain plugin;
     private final File userFile;
 
     public Verify(BungeeMain plugin, Configuration messageConfig) throws IOException {
-        File userFile = new File(plugin.getDataFolder(), "userdata.yml");
+        this.plugin = plugin;
+        this.messageConfig = messageConfig;
+        this.userFile = new File(plugin.getDataFolder(), "userdata.yml");
+
         if (!userFile.exists()) {
             if (userFile.createNewFile()) {
                 plugin.getLogger().info("Created new userdata.yml file.");
@@ -30,16 +32,12 @@ public class Verify {
             }
         }
 
-        YamlConfiguration yamlConfiguration = YamlConfiguration.loadConfiguration(userFile);
-        if (!yamlConfiguration.isConfigurationSection("users")) {
-            yamlConfiguration.createSection("users");
-            yamlConfiguration.save(userFile);
-        }
+        this.userConfig = ConfigurationProvider.getProvider(YamlConfiguration.class).load(userFile);
 
-        this.plugin = plugin;
-        this.userConfig = yamlConfiguration;
-        this.messageConfig = messageConfig;
-        this.userFile = userFile;
+        if (!userConfig.contains("users")) {
+            userConfig.set("users", new Configuration());
+            saveUserData();
+        }
     }
 
     public String verifyPlatform(ProxiedPlayer player, String token, String platform_id) throws IOException {
@@ -63,20 +61,20 @@ public class Verify {
         String userPath = "users." + uuid;
 
         // Check if the player is already verified
-        if (this.userConfig.contains(userPath + ".verified") && this.userConfig.getBoolean(userPath + ".verified")) {
+        if (userConfig.contains(userPath + ".verified") && userConfig.getBoolean(userPath + ".verified")) {
             message = plugin.safeTranslate(messageConfig.getString("platform.alreadyVerified"));
             return message;
         }
 
         // Set the verification data
-        this.userConfig.set(userPath + ".id", platformId);
-        this.userConfig.set(userPath + ".verified", true);
+        userConfig.set(userPath + ".id", platformId);
+        userConfig.set(userPath + ".verified", true);
         saveUserData();
 
         return message;
     }
 
     private void saveUserData() throws IOException {
-        this.userConfig.save(this.userFile);
+        ConfigurationProvider.getProvider(YamlConfiguration.class).save(userConfig, userFile);
     }
 }

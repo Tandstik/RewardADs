@@ -32,7 +32,7 @@ public class Version {
                 JsonObject jsonObject = jsonElement.getAsJsonObject();
                 String currentVersion = jsonObject.get("name").getAsString();
                 this.versionNumber = currentVersion.split(" ")[0].substring(1);
-                return Objects.equals(currentVersion, getPlugin());
+                return Objects.equals(versionNumber, getPlugin());
             } catch(Exception e) {
                 Error.send(this.code, e);
                 return false;

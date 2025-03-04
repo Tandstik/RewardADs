@@ -14,9 +14,11 @@ import org.json.simple.parser.ParseException;
 
 public class User {
     private final Plugin plugin;
+    private final String code;
 
     public User(Plugin plugin) {
         this.plugin = plugin;
+        this.code = plugin.getConfig().getString("code");
     }
 
     public String getId(Player player) {
@@ -112,7 +114,7 @@ public class User {
     }
 
     public int getBuys(Player player) {
-        Future<String> future = Api.handle("getbuy/" + getId(player));
+        Future<String> future = Api.handle("getbuy/" + getId(player) + "/" + code);
 
         try {
             String response = future.get();

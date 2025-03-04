@@ -41,17 +41,19 @@ public class SpigotMain extends JavaPlugin {
                 getLogger().info("Library RewardADs (Spigot) enabled!");
                 getLogger().info("Welcome back " + server.getName() + " to RewardADs!");
                 new Requests(this).runTaskTimer(this, 0, 200);
-                version.checkForUpdate();
             } else if(!server.isValid()) {
                 getLogger().severe(safeTranslate(messageConfig.getString("invalid-code")));
             } else {
-                this.getServer().getMessenger().registerIncomingPluginChannel(this, "rewardads:channel", new BungeeListener(this));
-                this.getServer().getMessenger().registerOutgoingPluginChannel(this, "rewardads:channel");
+                getServer().getMessenger().registerIncomingPluginChannel(this, "rewardads:channel", new BungeeListener(this));
+                getServer().getMessenger().registerOutgoingPluginChannel(this, "rewardads:channel");
 
                 // Debugging: Print both incoming and outgoing channels
-                System.out.println("Registered incoming channels: " + String.join(", ", this.getServer().getMessenger().getIncomingChannels()));
-                System.out.println("Registered outgoing channels: " + String.join(", ", this.getServer().getMessenger().getOutgoingChannels()));
+                getLogger().info("Registered incoming channels: " + String.join(", ", this.getServer().getMessenger().getIncomingChannels()));
+                getLogger().info("Registered outgoing channels: " + String.join(", ", this.getServer().getMessenger().getOutgoingChannels()));
+                getLogger().info("Library RewardADs (Spigot & Bungee) enabled!");
+                getLogger().info("Welcome back " + server.getName() + " to RewardADs!");
             }
+            version.checkForUpdate();
         } catch(Exception e) {
             Error.send(server.getCode(), e);
         }

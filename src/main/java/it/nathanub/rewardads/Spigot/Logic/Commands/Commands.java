@@ -81,6 +81,10 @@ public class Commands implements CommandExecutor {
                     throw new IllegalStateException("User configuration is not loaded.");
                 }
             } else if(command.getName().equalsIgnoreCase("confirm")) {
+                if(!(sender.hasPermission("rewardads.confirm"))){
+                    sender.sendMessage(plugin.safeTranslate(messageConfig.getString("no-permission")));
+                    return true;
+                }
                 if(args.length > 1) {
                     String token = args[0];
                     String platform_id = args[1];

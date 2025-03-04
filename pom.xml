@@ -6,7 +6,7 @@
 
     <groupId>it.nathanub</groupId>
     <artifactId>RewardADs</artifactId>
-    <version>5.7</version>
+    <version>6.0</version>
     <packaging>jar</packaging>
 
     <name>RewardADs</name>

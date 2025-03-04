@@ -20,10 +20,7 @@ import it.nathanub.rewardads.Velocity.Tools.Server.Server;
 import it.nathanub.rewardads.Velocity.Tools.Version.Version;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.CopyOption;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
+import java.nio.file.*;
 import java.nio.file.attribute.FileAttribute;
 import java.util.Optional;
 import java.util.Properties;
@@ -33,7 +30,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.slf4j.Logger;
 
-@Plugin(id = "rewardads", name = "RewardADs", version = "5.8", authors = {"Wiinup, Nathanub"})
+@Plugin(id = "rewardads")
 public class VelocityMain {
     private static VelocityMain instance;
 
@@ -54,6 +51,8 @@ public class VelocityMain {
     private ScheduledTask task;
 
     private final ChannelIdentifier channel;
+    @Inject
+    private PluginContainer plugin;
 
     @Inject
     public VelocityMain(ProxyServer server, Logger logger, @DataDirectory Path dataDirectory) {
@@ -67,9 +66,7 @@ public class VelocityMain {
     }
 
     public void startTask() {
-        this
-
-                .task = this.server.getScheduler().buildTask(this, () -> (new Requests(this)).run()).repeat(1L, TimeUnit.SECONDS).schedule();
+        this.task = this.server.getScheduler().buildTask(this, () -> (new Requests(this)).run()).repeat(1L, TimeUnit.SECONDS).schedule();
     }
 
     public void stopTask() {
@@ -106,11 +103,11 @@ public class VelocityMain {
         }
         if (platform.isValid()) {
             this.logger.info("Welcome back " + platform.getName() + " to RewardADs!");
-            version.checkForUpdate();
         } else {
             String message = getMessage("invalid-code");
             this.logger.info(message + "\033[0m");
         }
+        version.checkForUpdate();
     }
 
     private void createConfigFiles() {
@@ -126,7 +123,7 @@ public class VelocityMain {
 
     private void copyDefaultConfig(String fileName) throws IOException {
         Path filePath = this.dataDirectory.resolve(fileName);
-        if (Files.notExists(filePath, new java.nio.file.LinkOption[0])) {
+        if (Files.notExists(filePath, new LinkOption[0])) {
             InputStream inputStream = getClass().getResourceAsStream("/" + fileName);
             try {
                 if (inputStream != null) {
@@ -151,9 +148,9 @@ public class VelocityMain {
     public void loadMessages() {
         Path messagesPath = this.dataDirectory.resolve("messages_velocity.yml");
         this.messageConfig = new Properties();
-        if (Files.exists(messagesPath, new java.nio.file.LinkOption[0]))
+        if (Files.exists(messagesPath, new LinkOption[0]))
             try {
-                InputStream inputStream = Files.newInputStream(messagesPath, new java.nio.file.OpenOption[0]);
+                InputStream inputStream = Files.newInputStream(messagesPath, new OpenOption[0]);
                 try {
                     this.messageConfig.load(inputStream);
                     if (inputStream != null)
@@ -175,9 +172,9 @@ public class VelocityMain {
     public void loadConfig() {
         Path configPath = this.dataDirectory.resolve("velocity.yml");
         this.config = new Properties();
-        if (Files.exists(configPath, new java.nio.file.LinkOption[0]))
+        if (Files.exists(configPath, new LinkOption[0]))
             try {
-                InputStream inputStream = Files.newInputStream(configPath, new java.nio.file.OpenOption[0]);
+                InputStream inputStream = Files.newInputStream(configPath, new OpenOption[0]);
                 try {
                     this.config.load(inputStream);
                     if (inputStream != null)
@@ -199,9 +196,9 @@ public class VelocityMain {
     public void loadUserData() {
         Path userPath = this.dataDirectory.resolve("userdata.yml");
         this.userData = new Properties();
-        if (Files.exists(userPath, new java.nio.file.LinkOption[0]))
+        if (Files.exists(userPath, new LinkOption[0]))
             try {
-                InputStream inputStream = Files.newInputStream(userPath, new java.nio.file.OpenOption[0]);
+                InputStream inputStream = Files.newInputStream(userPath, new OpenOption[0]);
                 try {
                     this.userData.load(inputStream);
                     if (inputStream != null)
@@ -216,7 +213,7 @@ public class VelocityMain {
                     throw throwable;
                 }
             } catch (IOException e) {
-                this.logger.error("Failed to load velocity.yml", e);
+                this.logger.error("Failed to load userdata.yml", e);
             }
     }
 
@@ -247,7 +244,7 @@ public class VelocityMain {
     }
 
     public String getVersion() {
-        return getConfig("version");
+        return plugin.getDescription().getVersion().orElse("Unknown");
     }
 
     public Component safeTranslate(String message) {

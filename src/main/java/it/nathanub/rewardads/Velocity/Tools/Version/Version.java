@@ -31,13 +31,13 @@ public class Version {
                 JsonObject jsonObject = jsonElement.getAsJsonObject();
                 String currentVersion = jsonObject.get("name").getAsString();
                 this.versionNumber = currentVersion.split(" ")[0].substring(1);
-                return Boolean.valueOf(Objects.equals(currentVersion, getPlugin()));
+                return Objects.equals(versionNumber, getPlugin());
             } catch (Exception e) {
                 Error.send(this.code, e);
-                return Boolean.valueOf(false);
+                return Boolean.FALSE;
             }
         }).thenAccept(upToDate -> {
-            if (!upToDate.booleanValue())
+            if (!upToDate)
                 VelocityMain.getInstance().getLogger().warn("Keep me updated! Download the latest version from https://spi.rewardads.it.");
             else
                 VelocityMain.getInstance().getLogger().info(ANSI_GREEN + "You're UpToDate to latest version: " + ANSI_YELLOW + "v" + versionNumber + ANSI_RESET);

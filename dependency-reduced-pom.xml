@@ -4,7 +4,7 @@
   <groupId>it.nathanub</groupId>
   <artifactId>RewardADs</artifactId>
   <name>RewardADs</name>
-  <version>5.5</version>
+  <version>6.0</version>
   <build>
     <defaultGoal>clean package</defaultGoal>
     <resources>
