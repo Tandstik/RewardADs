@@ -20,6 +20,7 @@ public class Buy {
         String costReward = event.get("cost");
         String playerName = event.get("player");
         String userId = event.get("user");
+        String quantity = event.get("quantity");
 
         // Verifica che tutti i dati siano presenti
         if (userId == null || playerName== null || idReward == null || nameReward == null || costReward == null || code == null) {
@@ -39,14 +40,15 @@ public class Buy {
                 out.writeUTF("OnBuy"); // Identificatore del messaggio
                 out.writeUTF(player.getName());
                 out.writeUTF(idReward);
+                out.writeUTF(userId);
+                out.writeUTF(quantity);
                 out.writeUTF(nameReward);
                 out.writeUTF(costReward);
                 out.writeUTF(code);
 
                 // Invia il messaggio al server del giocatore
                 server.sendData("rewardads:channel", byteArray.toByteArray());
-                plugin.getLogger().info("Messaggio inviato a Spigot per il player " + player.getName());
-                update(event, "ok");
+                plugin.getLogger().info("Message sent to Spigot for " + player.getName());
             } catch (IOException e) {
                 e.printStackTrace();
             }

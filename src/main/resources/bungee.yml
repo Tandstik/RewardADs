@@ -1,5 +1,5 @@
 name: 'RewardADs'
-version: '6.1'
+version: '6.2'
 main: it.nathanub.rewardads.BungeeMain
 description: 'RewardADs official library for BungeeCord'
 author: "Nathanub, WiinUp_YT"

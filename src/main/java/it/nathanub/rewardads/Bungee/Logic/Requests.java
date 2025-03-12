@@ -18,7 +18,7 @@ public class Requests implements Runnable {
     private final String code;
     private final Buy buy;
     private final Gson gson;
-    private List<Map<String, String>> cachedRewards;
+    public List<Map<String, String>> cachedRewards;
 
     String prefix = "§7[§6R§7] §f";
 

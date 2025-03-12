@@ -30,7 +30,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.slf4j.Logger;
 
-@Plugin(id = "rewardads", name = "RewardADs", version = "6.1", authors = "Wiinup, Nathanub")
+@Plugin(id = "rewardads", name = "RewardADs", version = "6.2", authors = "Wiinup, Nathanub")
 public class VelocityMain {
     private static VelocityMain instance;
 
@@ -59,9 +59,9 @@ public class VelocityMain {
         this.server = server;
         this.logger = logger;
         this.dataDirectory = dataDirectory;
-        this.channel = (ChannelIdentifier)MinecraftChannelIdentifier.create("rewardads", "channel");
+        this.channel = MinecraftChannelIdentifier.create("rewardads", "channel");
         this.server.getChannelRegistrar().register(new ChannelIdentifier[] { this.channel });
-        this.logger.info("Canale di messaggi registrato: " + this.channel.getId());
+        this.logger.info("Channel registered: " + this.channel.getId());
         instance = this;
     }
 

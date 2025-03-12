@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import it.nathanub.rewardads.Spigot.Logic.Buy.Buy;
 import it.nathanub.rewardads.Spigot.Logic.Rewards.Rewards;
 import it.nathanub.rewardads.Spigot.Tools.Logs.Error;
+import it.nathanub.rewardads.SpigotMain;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -14,14 +15,14 @@ import java.util.Map;
 
 public class Requests extends BukkitRunnable {
     private final Rewards rewards;
-    private final Plugin plugin;
+    private final SpigotMain plugin;
     private final String code;
     private final Buy buy;
     private final Gson gson;
-    private List<Map<String, String>> cachedRewards;
+    public List<Map<String, String>> cachedRewards;
 
 
-    public Requests(Plugin plugin) {
+    public Requests(SpigotMain plugin) {
         this.plugin = plugin;
         this.code = plugin.getConfig().getString("code");
         this.buy = new Buy(plugin);
@@ -44,7 +45,8 @@ public class Requests extends BukkitRunnable {
                         for(Map<String, String> reward : cachedRewards) {
                             String status = reward.get("status");
                             if(status.equalsIgnoreCase("pending")) {
-                                buy.handle(plugin, reward);
+                                plugin.events = reward;
+                                buy.handle(reward);
                             }
                         }
                     }

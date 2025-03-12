@@ -24,7 +24,7 @@ public class Requests implements Runnable {
 
     private final Logger logger;
 
-    private List<Map<String, String>> cachedRewards;
+    public List<Map<String, String>> cachedRewards;
 
 
     public Requests(VelocityMain plugin) {

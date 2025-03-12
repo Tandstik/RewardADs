@@ -14,6 +14,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class SpigotMain extends JavaPlugin {
@@ -21,6 +23,7 @@ public class SpigotMain extends JavaPlugin {
     public FileConfiguration userConfig;
     private final Version version = new Version(this);
     private static SpigotMain instance;
+    public Map<String, String> events = new HashMap<>();
 
     private File messagesFile;
     public FileConfiguration messageConfig;
