@@ -30,7 +30,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.slf4j.Logger;
 
-@Plugin(id = "rewardads")
+@Plugin(id = "rewardads", name = "RewardADs", version = "6.1", authors = "Wiinup, Nathanub")
 public class VelocityMain {
     private static VelocityMain instance;
 

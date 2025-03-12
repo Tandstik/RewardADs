@@ -53,7 +53,7 @@ public class Requests implements Runnable {
                 }
             } catch (Exception e) {
                 Error.send(this.code, e);
-                this.logger.error("durante l'elaborazione delle ricompense", e);
+                this.logger.error("Error during request: ", e);
             }
         }).schedule();
     }
