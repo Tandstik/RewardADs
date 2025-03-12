@@ -1,8 +1,10 @@
-<center>
+<div align=center>
   
 # ![Logo](https://i.imgur.com/SPOTXB3.png)
 
 Monetize your server effortlessly with **RewardADs**!
+
+[![Version](https://badges.spiget.org/resources/version/Version-orange-121867.svg)](https://spi.rewardads.it)
 
 [![Wiki](https://i.imgur.com/jGDfaYs.png)](https://wiki.rewardads.it)  
 [![Discord](https://i.imgur.com/EN3WaFG.png)](https://disc.rewardads.it)  
@@ -41,6 +43,6 @@ giving them a **sustainable way to fund and expand** their server.
 ### **More Guides**
 [![Watch](https://img.youtube.com/vi/u0V7nj0w5mQ/0.jpg)](https://www.youtube.com/watch?v=u0V7nj0w5mQ)
 
-## **Turn engagement into earnings with RewardADs!** 🚀
+## **Turn engagement into earnings with RewardADs!!** 🚀
 
-</center>
+
