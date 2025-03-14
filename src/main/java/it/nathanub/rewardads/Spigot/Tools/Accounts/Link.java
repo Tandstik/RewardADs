@@ -64,18 +64,14 @@ public class Link {
 
         try {
             String jsonResponse = response.get();
-            if (jsonResponse != null && !jsonResponse.isEmpty()) {
-                if (jsonResponse.contains("\"minecraft_user\"")) {
-                    JsonObject jsonObject = JsonParser.parseString(jsonResponse).getAsJsonObject();
+            if (jsonResponse != null && !jsonResponse.trim().isEmpty()) {
+                JsonObject jsonObject = JsonParser.parseString(jsonResponse).getAsJsonObject();
 
-                    if (jsonObject.has("minecraft_user")) {
-                        String minecraftUser = jsonObject.get("minecraft_user").getAsString();
-
-                        return minecraftUser != null && !minecraftUser.trim().isEmpty();
-                    }
+                if (jsonObject.has("minecraft_user") && !jsonObject.get("minecraft_user").isJsonNull()) {
+                    String minecraftUser = jsonObject.get("minecraft_user").getAsString().trim();
+                    return !minecraftUser.isEmpty();
                 }
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }

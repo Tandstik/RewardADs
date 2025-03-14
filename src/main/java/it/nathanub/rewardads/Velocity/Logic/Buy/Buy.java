@@ -25,6 +25,7 @@ public class Buy {
         String playerName = event.get("player");
         String userId = event.get("user");
         String quantity = event.get("quantity");
+
         if (userId == null || playerName == null || idReward == null || nameReward == null || costReward == null || code == null) {
             logger.warn("Missing event data: " + event);
             return;

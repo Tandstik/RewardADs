@@ -28,12 +28,19 @@ public class User {
         try {
             String jsonResponse = response.get();
             if (jsonResponse != null && !jsonResponse.isEmpty()) {
+                // Controlla se la risposta contiene l'errore "User is not linked"
+                if (jsonResponse.contains("\"error\":\"User is not linked\"")) {
+                    // Puoi restituire un messaggio personalizzato o un valore di fallback
+                    return "not_linked";
+                }
+
+                // Se la risposta è valida, cerca l'ID utente
                 if (jsonResponse.contains("\"id_user\"")) {
                     JsonObject jsonObject = JsonParser.parseString(jsonResponse).getAsJsonObject();
 
                     if (jsonObject.has("id_user")) {
                         String idUser = jsonObject.get("id_user").getAsString();
-                        if(idUser != null && !idUser.trim().isEmpty()){
+                        if (idUser != null && !idUser.trim().isEmpty()) {
                             return idUser;
                         }
                     }
@@ -45,6 +52,7 @@ public class User {
         }
         return "null";
     }
+
 
     public String getUUId(String idPlayer) {
         if(idPlayer == null)
@@ -78,6 +86,16 @@ public class User {
         JSONParser parser = new JSONParser();
         JSONObject jsonObject = (JSONObject)parser.parse(response);
         String name = (String)jsonObject.get("name_user");
+        return (name == null) ? "" : name;
+    }
+
+    public String getMcName(String idPlayer) throws ExecutionException, InterruptedException, ParseException {
+        Future<String> future = Api.handle("getaccountbyid/" + idPlayer);
+        String response = future.get();
+
+        JSONParser parser = new JSONParser();
+        JSONObject jsonObject = (JSONObject)parser.parse(response);
+        String name = (String)jsonObject.get("minecraft_user");
         return (name == null) ? "" : name;
     }
 
