@@ -17,6 +17,7 @@ Legend:
 
 | Status  | Mc version        | Platform              | Minimum Java Version | End of Support |
 |---------|------------------|----------------------|----------------------|---------------|
+| 🟢     | 1.21.5           | Spigot, Paper        | 11                   | Supported     |
 | 🟢     | 1.21.4           | Spigot, Paper        | 11                   | Supported     |
 | 🟢     | 1.21.3           | Spigot, Paper        | 11                   | Supported     |
 | 🟢     | 1.21.2           | Spigot, Paper        | 11                   | Supported     |
@@ -46,8 +47,8 @@ Legend:
 
 | Status  | Proxy Platform  | Supported Versions |
 |---------|---------------|-------------------|
-| 🟢     | BungeeCord    | 1.8 - 1.21.4     |
-| 🟢     | Velocity      | 1.8 - 1.21.4     |
+| 🟢     | BungeeCord    | 1.8 - 1.21.5     |
+| 🟢     | Velocity      | 1.8 - 1.21.5     |
 
 =======
 ---
@@ -68,6 +69,7 @@ Legend:
 
 | Status  | Mc version        | Platform              | Minimum Java Version | End of Support |
 |---------|------------------|----------------------|----------------------|---------------|
+| 🟢     | 1.21.5           | Spigot, Paper        | 11                   | Supported     |
 | 🟢     | 1.21.4           | Spigot, Paper        | 11                   | Supported     |
 | 🟢     | 1.21.3           | Spigot, Paper        | 11                   | Supported     |
 | 🟢     | 1.21.2           | Spigot, Paper        | 11                   | Supported     |
@@ -97,7 +99,7 @@ Legend:
 
 | Status  | Proxy Platform  | Supported Versions |
 |---------|---------------|-------------------|
-| 🟢     | BungeeCord    | 1.8 - 1.21.4     |
-| 🟢     | Velocity      | 1.8 - 1.21.4     |
+| 🟢     | BungeeCord    | 1.8 - 1.21.5     |
+| 🟢     | Velocity      | 1.8 - 1.21.5     |
 
 >>>>>>> 70de38c (Initial commit)
