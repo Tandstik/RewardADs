@@ -45,7 +45,7 @@ import java.util.Map;
 public final class GenericMultipleBarcodeReader implements MultipleBarcodeReader {
 
   private static final int MIN_DIMENSION_TO_RECUR = 100;
-  private static final int MAX_DEPTH = 4;
+  private static final int DEFAULT_MAX_DEPTH = 4;
 
   static final Result[] EMPTY_RESULT_ARRAY = new Result[0];
 
@@ -64,7 +64,17 @@ public final class GenericMultipleBarcodeReader implements MultipleBarcodeReader
   public Result[] decodeMultiple(BinaryBitmap image, Map<DecodeHintType,?> hints)
       throws NotFoundException {
     List<Result> results = new ArrayList<>();
-    doDecodeMultiple(image, hints, results, 0, 0, 0);
+
+    int maxDepth = DEFAULT_MAX_DEPTH;
+    if (hints != null && hints.containsKey(DecodeHintType.MAX_DEPTH)) {
+      Object val = hints.get(DecodeHintType.MAX_DEPTH);
+      if (val instanceof Integer) {
+        maxDepth = (Integer) val;
+      }
+    }
+
+    doDecodeMultiple(image, hints, results, 0, 0, 0, maxDepth);
+
     if (results.isEmpty()) {
       throw NotFoundException.getNotFoundInstance();
     }
@@ -76,8 +86,9 @@ public final class GenericMultipleBarcodeReader implements MultipleBarcodeReader
                                 List<Result> results,
                                 int xOffset,
                                 int yOffset,
-                                int currentDepth) {
-    if (currentDepth > MAX_DEPTH) {
+                                int currentDepth,
+                                int maxDepth) {
+    if (currentDepth > maxDepth) {
       return;
     }
 
@@ -87,9 +98,11 @@ public final class GenericMultipleBarcodeReader implements MultipleBarcodeReader
     } catch (ReaderException ignored) {
       return;
     }
+
     boolean alreadyFound = false;
     for (Result existingResult : results) {
-      if (existingResult.getText().equals(result.getText())) {
+      if (existingResult.getText().equals(result.getText()) &&
+          existingResult.getBarcodeFormat().equals(result.getBarcodeFormat())) {
         alreadyFound = true;
         break;
       }
@@ -97,6 +110,7 @@ public final class GenericMultipleBarcodeReader implements MultipleBarcodeReader
     if (!alreadyFound) {
       results.add(translateResultPoints(result, xOffset, yOffset));
     }
+
     ResultPoint[] resultPoints = result.getResultPoints();
     if (resultPoints == null || resultPoints.length == 0) {
       return;
@@ -129,31 +143,39 @@ public final class GenericMultipleBarcodeReader implements MultipleBarcodeReader
 
     // Decode left of barcode
     if (minX > MIN_DIMENSION_TO_RECUR) {
-      doDecodeMultiple(image.crop(0, 0, (int) minX, height),
-                       hints, results,
-                       xOffset, yOffset,
-                       currentDepth + 1);
+      try {
+        BinaryBitmap left = image.crop(0, 0, (int) minX, height);
+        doDecodeMultiple(left, hints, results, xOffset, yOffset, currentDepth + 1, maxDepth);
+      } catch (Exception ignored) {
+        // Ignore cropping exceptions
+      }
     }
     // Decode above barcode
     if (minY > MIN_DIMENSION_TO_RECUR) {
-      doDecodeMultiple(image.crop(0, 0, width, (int) minY),
-                       hints, results,
-                       xOffset, yOffset,
-                       currentDepth + 1);
+      try {
+        BinaryBitmap above = image.crop(0, 0, width, (int) minY);
+        doDecodeMultiple(above, hints, results, xOffset, yOffset, currentDepth + 1, maxDepth);
+      } catch (Exception ignored) {
+        // Ignore cropping exceptions
+      }
     }
     // Decode right of barcode
     if (maxX < width - MIN_DIMENSION_TO_RECUR) {
-      doDecodeMultiple(image.crop((int) maxX, 0, width - (int) maxX, height),
-                       hints, results,
-                       xOffset + (int) maxX, yOffset,
-                       currentDepth + 1);
+      try {
+        BinaryBitmap right = image.crop((int) maxX, 0, width - (int) maxX, height);
+        doDecodeMultiple(right, hints, results, xOffset + (int) maxX, yOffset, currentDepth + 1, maxDepth);
+      } catch (Exception ignored) {
+        // Ignore cropping exceptions
+      }
     }
     // Decode below barcode
     if (maxY < height - MIN_DIMENSION_TO_RECUR) {
-      doDecodeMultiple(image.crop(0, (int) maxY, width, height - (int) maxY),
-                       hints, results,
-                       xOffset, yOffset + (int) maxY,
-                       currentDepth + 1);
+      try {
+        BinaryBitmap below = image.crop(0, (int) maxY, width, height - (int) maxY);
+        doDecodeMultiple(below, hints, results, xOffset, yOffset + (int) maxY, currentDepth + 1, maxDepth);
+      } catch (Exception ignored) {
+        // Ignore cropping exceptions
+      }
     }
   }
 
@@ -167,14 +189,16 @@ public final class GenericMultipleBarcodeReader implements MultipleBarcodeReader
       ResultPoint oldPoint = oldResultPoints[i];
       if (oldPoint != null) {
         newResultPoints[i] = new ResultPoint(oldPoint.getX() + xOffset, oldPoint.getY() + yOffset);
+      } else {
+        newResultPoints[i] = null;
       }
     }
     Result newResult = new Result(result.getText(),
-                                  result.getRawBytes(),
-                                  result.getNumBits(),
-                                  newResultPoints,
-                                  result.getBarcodeFormat(),
-                                  result.getTimestamp());
+                                 result.getRawBytes(),
+                                 result.getNumBits(),
+                                 newResultPoints,
+                                 result.getBarcodeFormat(),
+                                 result.getTimestamp());
     newResult.putAllMetadata(result.getResultMetadata());
     return newResult;
   }
